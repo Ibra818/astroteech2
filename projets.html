@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - AstroTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Poppins', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="text-2xl font-display font-bold text-primary-600">AstroTech</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Accueil</a>
+                        <a href="projets.html" class="text-primary-600 border-b-2 border-primary-600 px-3 py-2 text-sm font-medium">Projets</a>
+                        <a href="about.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">À Propos</a>
+                        <a href="index.html#contact" class="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary-600" aria-label="Ouvrir le menu mobile" title="Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block text-gray-700 hover:text-primary-600 px-3 py-2 text-base font-medium">Accueil</a>
+                <a href="projets.html" class="block text-primary-600 px-3 py-2 text-base font-medium font-semibold">Projets</a>
+                <a href="about.html" class="block text-gray-700 hover:text-primary-600 px-3 py-2 text-base font-medium">À Propos</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-3 py-2 text-base font-medium rounded-lg mx-3 text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-primary-50 to-accent-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-6">
+                    Nos Projets
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    Découvrez une sélection de nos réalisations les plus remarquables, 
+                    organisées par domaine d'application et technologie.
+                </p>
+                
+                <!-- Admin Controls -->
+                <div class="admin-hidden admin-panel rounded-lg p-4 max-w-md mx-auto mb-8">
+                    <div class="flex gap-4 justify-center">
+                        <button id="add-project-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                            Ajouter un projet
+                        </button>
+                        <button id="admin-logout" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors admin-hidden">
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-8">
+                    <button id="admin-login" class="text-sm text-gray-500 hover:text-primary-600 transition-colors">
+                        Mode Administrateur
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white sticky top-16 z-40 border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn bg-primary-600 text-white px-6 py-2 rounded-full font-medium hover:bg-primary-700 transition-colors" data-filter="all">
+                    Tous les projets
+                </button>
+                <button class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-2 rounded-full font-medium hover:bg-gray-50 transition-colors" data-filter="web">
+                    Applications Web
+                </button>
+                <button class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-2 rounded-full font-medium hover:bg-gray-50 transition-colors" data-filter="mobile">
+                    Applications Mobile
+                </button>
+                <button class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-2 rounded-full font-medium hover:bg-gray-50 transition-colors" data-filter="desktop">
+                    Applications Desktop
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be dynamically loaded here -->
+            </div>
+            
+            <div id="no-projects" class="text-center py-16 hidden">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun projet trouvé</h3>
+                <p class="mt-1 text-sm text-gray-500">Aucun projet ne correspond aux filtres sélectionnés.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 sm:p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 id="modal-title" class="text-2xl font-display font-bold text-gray-900"></h3>
+                    <button id="close-modal" class="text-gray-400 hover:text-gray-600" aria-label="Fermer la fenêtre" title="Fermer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <img id="modal-image" src="" alt="" class="w-full h-64 object-cover rounded-lg mb-4">
+                        <div id="modal-technologies" class="flex flex-wrap gap-2 mb-4"></div>
+                    </div>
+                    
+                    <div>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Description</h4>
+                                <p id="modal-description" class="text-gray-600"></p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Client</h4>
+                                <p id="modal-client" class="text-gray-600"></p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Année</h4>
+                                <p id="modal-year" class="text-gray-600"></p>
+                            </div>
+                            
+                            <div class="admin-hidden pt-4 border-t">
+                                <div class="flex gap-4">
+                                    <button id="edit-project-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                        Modifier
+                                    </button>
+                                    <button id="delete-project-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Project Modal -->
+    <div id="project-form-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 sm:p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 id="form-modal-title" class="text-2xl font-display font-bold text-gray-900">Ajouter un projet</h3>
+                    <button id="close-form-modal" class="text-gray-400 hover:text-gray-600" aria-label="Fermer le formulaire" title="Fermer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="project-form" class="space-y-6">
+                    <div>
+                        <label for="project-title" class="block text-sm font-medium text-gray-700 mb-2">Titre du projet</label>
+                        <input type="text" id="project-title" name="title" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="project-description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="project-description" name="description" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="project-type" class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                            <select id="project-type" name="type" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                <option value="">Sélectionnez un type</option>
+                                <option value="web">Application Web</option>
+                                <option value="mobile">Application Mobile</option>
+                                <option value="desktop">Application Desktop</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="project-client" class="block text-sm font-medium text-gray-700 mb-2">Client</label>
+                            <input type="text" id="project-client" name="client" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="project-year" class="block text-sm font-medium text-gray-700 mb-2">Année</label>
+                            <input type="number" id="project-year" name="year" min="2020" max="2030" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="project-image" class="block text-sm font-medium text-gray-700 mb-2">URL de l'image</label>
+                            <input type="url" id="project-image" name="image" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="project-technologies" class="block text-sm font-medium text-gray-700 mb-2">Technologies (séparées par des virgules)</label>
+                        <input type="text" id="project-technologies" name="technologies" placeholder="React, Node.js, PostgreSQL" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button type="submit" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                            Sauvegarder
+                        </button>
+                        <button type="button" id="cancel-form" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-display font-bold text-primary-400 mb-4">AstroTech</h3>
+                    <p class="text-gray-300 mb-4">
+                        Votre partenaire de confiance pour le développement de solutions logicielles innovantes et performantes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-primary-400 transition-colors">Accueil</a></li>
+                        <li><a href="projets.html" class="text-primary-400 font-semibold">Projets</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-primary-400 transition-colors">À Propos</a></li>
+                        <li><a href="index.html#contact" class="text-gray-300 hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p>contact@astrotech.dev</p>
+                        <p>+33 1 23 45 67 89</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 AstroTech. Tous droits réservés. Fondée par Ibrahima Youba Tounkara.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

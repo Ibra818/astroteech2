@@ -1,0 +1,31 @@
+# Protéger le dossier racine Laravel
+# Ce fichier doit être à la racine du projet (pas dans public/)
+
+# Bloquer l'accès direct aux fichiers sensibles
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "composer\.(json|lock)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "package(-lock)?\.json">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquer l'accès aux dossiers sensibles
+RedirectMatch 403 ^/\.git
+RedirectMatch 403 ^/storage/
+RedirectMatch 403 ^/vendor/
+RedirectMatch 403 ^/bootstrap/
+RedirectMatch 403 ^/config/
+RedirectMatch 403 ^/database/
+RedirectMatch 403 ^/routes/
+RedirectMatch 403 ^/tests/
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
